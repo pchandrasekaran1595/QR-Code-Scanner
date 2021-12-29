@@ -7,12 +7,12 @@ READ_PATH = "Files"
 
 
 def run():
-    args_1: tuple = ("--code", "-c")
+    args: tuple = ("--code", "-c")
 
     name: str = None
 
-    if args_1[0] in sys.argv: name = sys.argv[sys.argv.index(args_1[0]) + 1]
-    if args_1[1] in sys.argv: name = sys.argv[sys.argv.index(args_1[1]) + 1]
+    if args[0] in sys.argv: name = sys.argv[sys.argv.index(args[0]) + 1]
+    if args[1] in sys.argv: name = sys.argv[sys.argv.index(args[1]) + 1]
 
     assert name is not None, "Enter an argument for --code | -c"
 
@@ -21,4 +21,9 @@ def run():
     qr_detector = cv2.QRCodeDetector()
     data, _, _ = qr_detector.detectAndDecode(image)
 
-    webbrowser.open_new(data)
+    if data != "":
+        webbrowser.open_new(data)
+    else:
+        print("\n" + 50*"*" + "\n")
+        print("No data detected")
+        print("\n" + 50*"*" + "\n")
